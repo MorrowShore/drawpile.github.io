@@ -7,13 +7,12 @@ category: "help"
 tag: help draw
 ---
 
-Drawpile's Flood Fill tool, also sometimes called fill bucket or similar, lets you fill areas in a single go. It works similar to other programs, with the notable difference that it comes with a size limit to prevent disrupting other users.
+Drawpile's Flood Fill tool, also sometimes called fill bucket or similar, lets you fill areas in a single go. You can select the Flood Fill tool through Tools → Flood fill. The default shortcut is F.
 
-You can select the Flood Fill tool through Tools → Flood fill. The default shortcut is F.
+To apply the fill, left-click with it. To cancel it if it's taking too long, either right-click or hit the cancel action key (Escape by default.) You can also hold down the click and drag the cursor left and right to adjust the tolerance.
 
-To apply the fill, left-click with it. To cancel it if it's taking too long, either right-click or hit the cancel action key (Escape by default.)
-
-![Flood fill tool in action]({{ "/assets/img/help/floodfillcircle.webp" | relative_url }})
+* Table of contents
+{:toc}
 
 ## Tool Settings
 
@@ -23,31 +22,35 @@ The flood fill tool has several important settings. They appear in the same plac
 
 ### Size Limit
 
-The tool has a size limit to prevent the fill from spilling all across the canvas and "flashbanging" everybody else. The limit is a square area around the cursor.
+The size limit lets you limit the area that the fill tool applies to, which can make the fill run faster. You can also make a selection instead and constrain the fill tool area that way.
 
-![Flood fill size limit]({{ "/assets/img/help/floodfillrect.webp" | relative_url }})
+As of Drawpile 2.2.2, the size limit is no longer necessary to avoid "flashbanging" other people, so the default is set to unlimited. See [the Preview section below](#preview).
 
 You can adjust the size limit by using the slider in the tool settings or by using the same shortcuts that you use to change your brush size (`[` and `]` by default, or `Shift` + `Left Click` and dragging left and right, or `Shift` + `Middle Click` and dragging up and down.) Either make the size limit large enough to encompass the entire area you want to fill or do multiple separate fills. Using the latter technique also makes it easier to find holes in your lines.
 
-You can also make the size limit so large that it encompasses the entire canvas to make it behave like fill tools in other programs. However, this is likely to make other people you're drawing with pretty annoyed because you'll keep disrupting their drawings with your spills.
+![Flood fill size limit]({{ "/assets/img/help/floodfillrect.webp" | relative_url }})
 
-Large areas can take a while to fill in one go.
+### Opacity
+
+How opaque or transparent the fill should be. 100% means fully opaque (the default).
 
 ### Tolerance
 
-The tolerance decides how close a color in the source image needs to be to get filled. Zero means that the color needs to match exactly, higher values increase the distance.
+The tolerance decides how close a color in the source image needs to be to get filled. Zero means that the color needs to match exactly, higher values increase the distance. When you fill a transparent area, the tolerance is based on opacity.
 
-When you are filling a transparent area, only the opacity matters.
+You can quickly adust the tolerance for a fill until you find the correct amount by clicking and holding down the button, then dragging the cursor left and right.
 
-### Expand
+### Expand/Shrink
 
-This setting decides how many pixels the fill should be expanded after applying it. You can use this to grow the fill into the surrounding lines.
+This setting decides how many pixels the fill should be expanded after applying it. You can use this to grow the fill into the surrounding lines or shrink it away from them.
 
-Expanding by larger values may take a while.
+The drop-down buttons to the right of the slider let you switch between Expand and Shrink. You can also change the shape between a round and square expansion, the latter is useful for pixel art (and is slightly faster.)
+
+Setting larger expand or shrink values can be slow.
 
 ### Feather
 
-Feathering blurs the fill. This smoothes out the edges, rather than having them be hard pixels. Feathering is applied after [expansion](#expand).
+Feathering blurs the fill. This smoothes out the edges, rather than having them be hard pixels. Feathering is applied after [expansion or shrinking](#expandshrink).
 
 Large feather values may take a while to process.
 
@@ -61,12 +64,41 @@ Large gap close values can take a while to process.
 
 ### Source
 
-Decides where the fill tool takes its border area from. You usually set this to your lines layer and fill on a colors layer below.
+This determines what the fill tool bases its fill area on.
 
-Instead of picking a layer from the dropdown, an easier option is probably to right-click on a layer and selecting Set as Fill Source, or selecting a layer and using Layer → Set as Fill Source from the window menu.
+* **Merged image** (the two arrows) will use the entire image as the source.
+* **Merged without background** (the singular arrow) will use the entire image, but disregard the canvas background.
+* **Current layer** (the three layers) will use the currently-selected layer. This is the default.
+* **Fill source layer** (the two tags) will use the layer or group you set as the fill source. This will automatically be selected when you set a fill source and is only visible when one is present.
+
+To set or clear the fill source, right-click on a layer or use the Layer menu at the top of the main window.
 
 ![Set as fill source]({{ "/assets/img/help/setasfillsource.webp" | relative_url }})
 
 ### Mode
 
-The blend mode that the fill tool uses. The blend modes work like they do for brushes.
+The first three buttons let you pick how you want the tool to behave in general:
+
+* **Fill continuous area** (the bucket) will fill a connected area of a similar color or transparency. This is the default.
+* **Fill similar colors** (the eyedropper) will fill all areas of similar color or transparency, even when they're not connected. Be careful when working on shared layers, since you may be changing someone else's stuff outside of your view! Consider setting a size limit or constraining your fill tool area with a selection for this.
+* **Fill entire slection** (the dotted rectangle) will fill the selection, regardless of tolerance. You need to select an area for this to do anything.
+
+Next to that is the blend mode that the tool uses. These work like they do for brushes. The default is Normal.
+
+## Preview
+
+To avoid spilled fills spreading across the entire canvas and "flashbanging" other people, the fill tool will preview fills only visible to you at first. When you're looking at a preview, the cursor will have a checkmark on it and the Apply and Cancel buttons will be enabled.
+
+To abort a fill, you can either undo, right-click, press the Cancel button or hit the "cancel action" shortcut (Escape by default). This will get rid of the preview and no one else will have seen your fill.
+
+To apply a fill, you usally don't need to do anything. When you make another fill or switch to a different tool, the fill will become visible for everyone automatically. If you want to do it manually, you can press the Apply button or hit the "finish action" shortcut (Return/Enter by default). The hamburger menu at the top-left of the fill settings also gives you the option to confirm fills with a second left-click, rather than it immediately starting another fill.
+
+## Editing
+
+The hamburger menu at the top-left gives you the option to enable editing pending fills. This will make it so that you can modify your fill while it's previewing.
+
+In addition to letting you adjust any of the fill settings, you can also change the color of your fill or select a different layer to apply the fill on.
+
+<video controls>
+  <source src="{{ "/assets/vid/help/filledit.mp4" | relative_url }}" type="video/mp4"/>
+</video>

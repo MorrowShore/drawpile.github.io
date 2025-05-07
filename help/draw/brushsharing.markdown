@@ -18,9 +18,9 @@ You can also import MyPaint brush packs, Drawpile's format is compatible with th
 
 The quickest way to share a brush is to just take it from someone that's drawing with it. To do this, click on the three dots next to someone's name in the user list next to the chat and choose "take current brush."
 
-This will set your current brush to the same settings as theirs. You can then use and save the brush like you would normally, giving it a name and thumbnail of your choice.
+This will set your current brush slot to the same settings as theirs. You can then use it as normal. You'll receive whatever they are using currently, which may be their eraser brush.
 
-If they are currently using their eraser, you'll receive that instead of their regular brush.
+The brush settings won't be stuffed into your brushes automatically, so you don't have to clean anything up just because you wanted to look at someone's brush. However, if you like the brush and want to keep it, make sure to save it!
 
 ![Taking current brush]({{ "/assets/img/help/takecurrentbrush.webp" | relative_url }})
 

@@ -15,7 +15,7 @@ You can also use the tablet tester under Help → Tablet Tester. Use your tablet
 
 ![Tablet tester]({{ "/assets/img/help/tablettester.webp" | relative_url }})
 
-If pressure or the eraser on your pen isn't working, make sure that those are actually enabled in the settings. You can do so under Edit → Preferences in the Input tab under the "Enable pressure sensitivity" and "Detect eraser tip" settings.
+If pressure or the eraser on your pen isn't working, make sure that those are actually enabled in the settings. You can do so under Edit → Preferences in the Tablet tab under the "Pen pressure: Enable pressure sensitivity" and "Eraser tip behavior" settings.
 
 ![Tablet input preferences]({{ "/assets/img/help/inputenable.webp" | relative_url }})
 
@@ -68,10 +68,8 @@ There's no known issues with tablets on macOS. If you have trouble anyway, ask o
 
 ## Android
 
-Drawpile will try to recognize if your device has a pen or not and enable touch painting accordingly. If it gets it wrong, you can change it under Edit → Preferences in the Input tab under the "One-finger input" setting. Make sure the touch mode is set to "Touchscreen" if you want to draw by touching.
+Drawpile will try to recognize if your device has a pen or not and enable touch painting accordingly. If it gets it wrong, you can change it under Edit → Preferences in the Touch tab under the "One-finger input" setting. Make sure the touch mode is set to "Touchscreen" if you want to draw by touching.
 
-![Touch input preferences]({{ "/assets/img/help/inputtouch.webp" | relative_url }})
-
-Pen tilt and rotation is not supported on Android.
+![Touch preferences]({{ "/assets/img/help/inputtouch.webp" | relative_url }})
 
 If you have other issues, ask for help on Discord, in the web chat or GitHub. Take a look at [the help page](https://drawpile.net/help/) for links to those.

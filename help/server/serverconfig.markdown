@@ -416,7 +416,7 @@ Type: boolean
 
 Allows you to restrict session hosting to only accounts with the `HOST` flag.
 
-### Allow anyone to join via WebSocket
+### Allow anyone to join via web browser
 
 Key: `allowGuestWeb`
 
@@ -424,11 +424,23 @@ Default value: `true`
 
 Type: bool
 
-WebSockets are used for the browser version of Drawpile. This option decides if anyone is allowed to join this way or if only users with the WEB flag can.
+This option decides if anyone is allowed to join via web browser or if only users with the WEB flag can.
 
 Requires you to set [a WebSocket listen port](#websocket-listen-port) on startup and [set up a reverse proxy](#websocket-reverse-proxy-configuration) for it.
 
-### Allow anyone to manage WebSocket allowance on sessions
+### Allow anyone to host via web browser
+
+Key: `allowGuestWebHosts`
+
+Default value: `true`
+
+Type: bool
+
+This option decides if anyone is allowed to host sessions via web browser or if only users with the WEBHOST flag can.
+
+Requires you to set [a WebSocket listen port](#websocket-listen-port) on startup and [set up a reverse proxy](#websocket-reverse-proxy-configuration) for it.
+
+### Allow anyone to manage web browser allowance on sessions
 
 Key: `allowGuestWebSession`
 
@@ -624,6 +636,30 @@ Whether to pay mind to the external authentication's WEBSESSION flag.
 
 If you're using drawpile.net's authentication, you should turn this off unless you're running one of the official community servers.
 
+### Allow ext-auth web host
+
+Key: `extauthwebhost`
+
+Default value: `false`
+
+Type: bool
+
+Whether to pay mind to the external authentication's WEBHOST flag.
+
+If you're using drawpile.net's authentication, you should turn this off unless you're running one of the official community servers.
+
+### Allow ext-auth persistence
+
+Key: `extauthpersist`
+
+Default value: `false`
+
+Type: bool
+
+Whether to pay mind to the external authentication's PERSIST flag.
+
+If you're using drawpile.net's authentication, you should turn this off unless you're running one of the official community servers.
+
 ### Use ext-auth avatars
 
 Key: `extAuthAvatars`
@@ -646,16 +682,6 @@ Type: boolean
 
 Whether to restrict session listings to only explicitly allowed listing servers. The list of allowed servers is provided separately, this option only toggles if it is used or not.
 
-### Do not include user list in session announcements
-
-Key: `privateUserList`
-
-Default value: `false` (include users in listings)
-
-Type: boolean
-
-Whether to hide the list of users connected to a session (`true`) or include it (`false`). At the time of writing, these usernames aren't displayed anywhere, but they are visible in the listing server API.
-
 ### External bans source URL
 
 Key: `extBansUrl`
@@ -664,7 +690,7 @@ Default value: empty
 
 Type: string
 
-A URL of a a ban list service.
+DA URL of a a ban list service.
 
 Drawpile's community servers are given a URL like this so that they can share a single ban list. If you're running your own server, this is probably unnecessary, since you can just enter the bans into the server itself.
 
@@ -677,3 +703,57 @@ Default value: `900` (15 minutes)
 Type: time
 
 How often to check the external ban service.
+
+### Password-dependent browser allowance
+
+Key: `passwordDependentWebSession`
+
+Default value: `false`
+
+Type: boolean
+
+Whether to automatically allow joining passworded sessions via web browser and disallow joining public ones.
+
+### Empty session linger time
+
+Key: `emptySessionLingerTime`
+
+Default value: `0`
+
+Type: time
+
+How long non-persistent, empty sessions should linger after the last user left. Consider setting this to at least be a few minutes to let users rejoin if they accidentally got disconnected when they were the only person in a session.
+
+If you've passed [a session storage directory via --session](#session-storage-directory), sessions will also persist across restarts of the server for this amount of time. This can make the server going down much less disruptive, since users can just reconnect and keep drawing.
+
+## Require matching host
+
+Key: `requireMatchingHost`
+
+Default value: `false`
+
+Type: boolean
+
+Require hostnames given by clients to match the value given via `--local-host`. Enabling this option restricts clients to version 2.2.2 or newer, since older versions did not pass any hostnames.
+
+## Enable invite codes by default
+
+Key: `invites`
+
+Default value: `true`
+
+Type: boolean
+
+Whether to enable invite codes on newly hosted sessions. Moderators or server administrators can always toggle this per session.
+
+## Prefer WebSockets
+
+Key: `preferWebSockets`
+
+Default value: `false`
+
+Type: boolean
+
+Whether the server prefers using WebSockets over TCP sockets. This preference gets communicated to clients, which will create appropriate invite links for it that point at the WebSocket endpoint. Clients older than version 2.2.2 disregard the preference and always generate TCP invite links.
+
+WebSockets require passing [a WebSocket listen port](#websocket-listen-port) on startup and [set up a reverse proxy](#websocket-reverse-proxy-configuration) for it.

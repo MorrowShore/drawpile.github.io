@@ -11,54 +11,64 @@ If you want to start a new online drawing session, you can do so via the Host Se
 
 If you have trouble with this, you can ask for help on Discord or the web chat! You can find links to those [on the main help page](https://drawpile.net/help/).
 
-* [Get your canvas ready](#get-your-canvas-ready)
-* [Set up the session](#set-up-the-session)
-* [Pick a host](#pick-a-host)
-    * [Hosting on a server](#hosting-on-a-server) (recommended)
-    * [Hosting on your computer](#hosting-on-your-computer)
+* Table of contents
+{:toc}
 
+## Quick start
 
-## Get your canvas ready
+After you run, click on the Host Session tab. If your session allows adult content, check the **not suitable for minors (NSFM)** option.
 
-If you just want to start with a blank canvas, you can skip this section. Drawpile starts with a blank canvas anyway.
+You don't need to touch any other settings, just click the **Host** button at the bottom.
 
-Otherwise, open a file or create a new canvas and fill it with whatever you want to start with. When you're ready, select Session → Host… from the top menu.
+You'll be prompted to accept [public server rules](https://drawpile.net/communities/drawpile.net/ccg/) and to either log in or continue without an account.
 
-![Host menu]({{ "/assets/img/help/sessionhost.webp" | relative_url }})
-
-
-## Set up the session
-
-Go to the "Host Session" page on the start dialog. If you don't see it, select Session → Host… from the top menu (see the screenshot above.)
-
-* Give your session a **Title**. If you want to host a public session that strangers can join, it helps to be descriptive so that they know what they'll be getting into. If you just want to host a private session for people you invite, it doesn't matter much, just don't use anything offensive.
-
-* If you want your session to be private, give it a **Password**. That way, only people that you give the password to will be able to join. If you don't put a password on your session, it will be public and anyone can join it.
-
-* If your session allows adult content, check the **Not suitable for minors (NSFM)** option. If you're not sure if your content qualifies, err on the side of caution and check it.
+Afterwards, your session will be up with a blank canvas and you'll be prompted to invite people to it.
 
 ![Host page]({{ "/assets/img/help/hostdialog.webp" | relative_url }})
 
+## Hosting a canvas
 
-## Pick a host
+If you don't want to host an empty canvas, you can open a file first or fill the canvas with whatever you want to start with. Then select Session → Host from the top menu and continue as above.
 
-You can either [host on a server](#hosting-on-a-server), which is the easier option, or try to [host on your computer](#hosting-on-your-computer), which needs additional network stuff to be set up.
+![Host menu]({{ "/assets/img/help/sessionhost.webp" | relative_url }})
 
-### Hosting on a server
+## Hosting a public session
 
-This is the recommended option and works for any internet connection.
+By default, sessions are password-protected, which means only people that you give an invite link to can join. You can remove the password by changing the setting from Personal to Public when hosting, or by removing the password from an existing session in the session settings.
 
-Drawpile provides some [community servers](https://drawpile.net/communities/) where you can host your sessions for free. You have to [register an account on drawpile.net](https://drawpile.net/accounts/signup/){:target=_blank} for this. The public Drawpile server `pub.drawpile.net` is already preselected by default, but it has limited capacity, so you might have to pick a different one.
+Public sessions must be moderated properly. Take a look at [the help page on running public sessions](/help/server/sessionoperation) to learn about the tools
+
+Failing to properly handle public sessions will likely get it reported and lead to an administrator step in.
+
+## Ending a session
+
+Sessions will end on their own after everyone leaves. They may linger for a bit to give the last person to leave a chance to reconnect.
+
+If you want to make sure no one reconnects for some reason, you can go into Session → Settings and change the session password. This will render any invite links invalid.
+
+## Community servers
+
+There's some [official community servers](https://drawpile.net/communities/) that also let you host sessions on them. They have different themes, features and restrictions.
 
 When you host on these servers, you have to adhere to the rules they present you with and to [the common community guidelines](https://drawpile.net/communities/drawpile.net/ccg/)!
 
-Anyone can set up a server, so there's many others out on the internet. Those are not related to drawpile.net and can make their own rules.
+## Other servers
 
-After setting everything up and picking a server, click on the "Host" button at the bottom. You should be presented with the server rules and may be prompted to log into your account. Once you do so, your session will be available and others can join it. Drawpile will give you a link you can use to invite friends.
+Drawpile is public software, so anyone can set up a server for it. If you want to do it yourself, take a look at [the help pages on server hosting](/help/server/).
 
-### Hosting on your computer
+These servers aren't related to drawpile.net and they make their own rules.
 
-When hosting on your own computer, you need to make it visible from the internet for others to be able to join you. This is kind of tricky, [hosting on a server](#hosting-on-a-server) is an easier option.
+## Builtin server
+
+<div class="notification" markdown="1">
+Hosting with the builtin server is **not recommended**. It comes with numerous downsides over hosting on a proper server.
+
+Setting up your home network to allow connections is difficult, on some connections even impossible. Even if you set it up correctly, many internet providers don't allow connection to residential networks. Web browsers won't be able to connect to your session either, other people have to use the desktop or mobile application. If your computer turns off or the application crashes, the session will go down. There's also security and privacy implications of making your computer visible to the internet and giving other people your home IP address.
+
+You should host on [the public Drawpile server](#quick-start), on [a community server](#community-servers) or on [some other dedicated server](#other-servers) instead.
+</div>
+
+When hosting on your own computer, you need to configure your computer to be visible to the internet.
 
 If you already know what you're doing: **forward TCP port 27750**.
 

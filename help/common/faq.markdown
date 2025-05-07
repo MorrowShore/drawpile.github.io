@@ -46,7 +46,7 @@ For further troubleshooting, refer to [the tablet setup and troubleshooting page
 
 ### Why does Drawpile not draw when I touch my screen?
 
-Probably because it's not set to do so. Go into Edit → Preferences, switch to the "Input" tab. Make sure the touch mode is set to "Touchscreen" and the one-finger input is set to "Draw".
+Probably because it's not set to do so. Go into Edit → Preferences, switch to the "Touch" tab. Make sure the touch mode is set to "Touchscreen" and the one-finger input is set to "Draw".
 
 For further troubleshooting, refer to [the tablet setup and troubleshooting page](/help/tech/tablet).
 
@@ -73,26 +73,22 @@ If everyone in the session is having the issue, consider switching to a differen
 
 Undos are shared between all users. Operators can increase the undo limit under Session → Undo Limit.
 
-### What is this "session reset" that happens intermittently?
+### What is this "session reset" that keeps interrupting my session?
 
-The Drawpile server stores a history of all drawing commands made in the session. When that gets too big, the history is replaced with the current state of the canvas as a new starting point. That's the reset.
+As of Drawpile version 2.2.2, automatic session resets no longer interrupt the session. If it still happens, either the server is out of date or the operator(s) of the session are using an outdated client. Ask them to update.
 
-Operators can also manually reset the session under Session → Reset. It will make catchup for newly joining users faster, since they don't have to play back as much of the drawing.
+The reason these resets happen is that the Drawpile server stores a history of all drawing commands made in the session. When that gets too big, the history is replaced with the current state of the canvas as a new starting point. Older versions of the server had to stop everything to perform this reset, newer versions just do it on the fly instead.
 
 
 ## Drawing
 
 ### Why does Drawpile not save the changes to my brush?
 
-Drawpile won't overwrite brush presets automatically. To do so, click on the hamburger menu on the brushes dock or right-click on a preset and use "Overwrite Brush Preset". If you want to create a new one instead, use "New Brush Preset".
-
-You can also use the five brush slots to switch between different brush configurations without saving them.
-
-![Brush preset saving]({{ "/assets/img/help/overwritebrushpreset.webp" | relative_url }})
+This was changed in Drawpile 2.2.2. If your brush forgets its changes, you probably need to update.
 
 ### Why does the fill tool just fill a square?
 
-The fill tool has a size limit to avoid spills across the entire canvas and "flashbanging" everyone else. You can increase the limit in the tool's settings or by using the same shortcuts as for changing the size of brushes.
+This is the "size limit" option in the fill tool settings. Raise it up to the maximum to get an unlimited fill. If this doesn't work, you're on an old version of Drawpile and need to update.
 
 ### Why do layers with blend modes like Multiply not work inside layer groups?
 
@@ -113,6 +109,23 @@ In Drawpile, you alpha lock your brush, not the layer. For classic brushes, you 
 If you really need an alpha-locked layer, you can use another layer in Recolor mode. For more information on how to do that, check out [the full article on alpha locking](/help/draw/clipping#alpha-lock).
 
 ![Recolor mode on brushes]({{ "/assets/img/help/recolor.webp" | relative_url }})
+
+### How do I change the DPI/PPI?
+
+This question comes up pretty regularly, but it's usually because of misconceptions and misinformation about what DPI/PPI actually do.
+
+DPI stands for "dots per inch", PPI stands for "pixels per inch". They measure how many pixels a printer would put into an inch of paper.
+
+Drawpile doesn't support printing and it always measures canvas sizes in pixels, never inches or centimeters. That means changing the DPI/PPI wouldn't do anything, it's meaningless in digital drawing.
+
+If what you're actually trying to do is change the canvas size, go into "Edit" in the top menu and click on "Resize Canvas". There you can change the size.
+
+### How do I turn off the canvas rotation snapping around zero degrees?
+### How do I make the canvas rotation snap harder?
+
+Under Edit → Preferences, in the Shortcuts tab under Canvas, you can change the "rotate" options to "free rotate" instead. For touch rotation, it's in the Touch tab, where you can also change it from "rotate" to "free rotate".
+
+If you want it to snap harder, set it to "ratchet rotate" instead to get rotations in fixed increments.
 
 
 ## Tech
@@ -135,7 +148,7 @@ Yes, it's available [on the Download page](https://drawpile.net/download/#Androi
 
 ### Can I use Drawpile on my iPad?
 
-The browser version of Drawpile works on the iPad. It's currently in development and not yet generally available, but is coming.
+You can use the web browser version. See [the Browser section on the Downloads page](https://drawpile.net/download/#Browser).
 
 For a native application, Apple doesn't allow Drawpile in its App Store. There may be hope with regards to Apple being forced to open up their platform or via sideloading, but currently we don't have any developer that has the necessary devices and subscriptions to even try it out.
 

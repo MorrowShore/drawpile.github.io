@@ -131,20 +131,29 @@ The Export at the bottom-right lets you save what you are seeing. Refer to the [
 
 ## Export
 
-You can export the entire canvas as an animation using the default timeline settings using File → Export → Export Animated GIF or File → Export → Export Animation Frames. To export only a part of the canvas, use a different frame range or a different speed, press the Export button at the bottom right of the flipbook, see the [Flipbook section](#flipbook) above.
+You can export the entire canvas as an animation using File → Export → Export Animation. You can also press the Export button at the bottom right of the flipbook, see the [Flipbook section](#flipbook) above. Both of these will give you the animation export dialog.
 
-The GIF export will produce an animated GIF file. This is a pretty limited format, in particular, it only supports a limited amount of colors. The color palette is built from the merged image of the canvas, so if you last frame is something like a canvas-filling white, the palette will not be correct. You can switch to Normal View and rearrange your layers or add an extra palette layer on top that contains the colors in appropriate quantities.
+In the Output tab of this dialog, you can pick which format you want to export. The scaling option lets you resize the output. You'll probably want to keep it under 2000 pixels in either dimension, since otherwise mobile devices will often either refuse to play your animation or chug when doing so. With the smooth checkbox you can pick between smooth bilinear or hard nearest-neighbor scaling. If you're exporting an animation with hard pixel edges, you'll probably want to turn this off, but in most cases you'll probably want it enabled. If you're exporting to a video format, you can also choose how many types to loop it.
 
-For more complex needs, you can use the animation frame export. It will let you pick a directory and export all frames as individual PNG files. You can feed these frames into another program to produce a video file or similar.
+The following formats can be exported to, availability depends on the platform.
 
-## Importing Animations from Older Versions of Drawpile
+* Frames as PNGs will export the animation frames as separate PNG images, which you can then import into a video editor or other software for post-processing.
+* Frames as PNGs in ZIP is the same, except all the farmes will be in a ZIP file. This is the only option available in the web browser.
+* Animated GIF is an old animated image format. It only supports up to 256 colors and 1 bit alpha. Files are usually very large. However, the format is pretty ubiquitous and for small animations it's usually fine.
+* Animated WEBP is a newer animated image format, with full color support and small file sizes. It's not supported everywhere yet though.
+* MP4 video is a video format that should work just about everywhere and has reasonable quality and size.
+* WEBM video is a newer video format with smaller file sizes, but not supported everywhere.
 
-Older versions of Drawpile didn't have an animation timeline, they instead allowed you to animate by using one layer per frame and marking specific layers as "fixed" background or foreground layers. This system has been replaced in Drawpile 2.2, but you can convert your old animations over.
+In the Input tab, you can configure which parts of the canvas you want to put into your animation. The reset button will make it encompass the entire canvas with the timeline's full frame range and default framerate. The set from flipbook button will instead use the range, framerate and crop area as you're previewing it in the flipbook.
 
-This is done through File → Import → Import Drawpile 2.1 Animation. In the following dialog, choose the ORA file you want to import, decide how may frames each key frame should take up in the timeline and how fast the framerate should be, then hit Import.
+![Animation export dialog]({{ "/assets/img/help/animationexport.webp" | relative_url }})
 
-Your frames will be put into layer groups, fixed layers will be placed outside of them. For most normal animations, this will lead to one track and layer group for the frames, with the fixed frames above and below it.
+## Importing Animations
 
-At the time of writing, Drawpile does not have a way to import animation frames. You can work around this by importing your frames into another program that supports ORA files. For example, in GIMP, you can use File → Open as Layers and then export the result into an ORA file, which in turn you import into Drawpile as a 2.1 animation.
+You can import animations either from a set of separate files or from the layers of an ORA or PSD file using File → Import → Import Animation.
+
+The Frames tab is for importing separate frame images. You can add files and sort them here. The Layers tab is to import a single ORA or PSD file, whose layers get turned into timeline frames. That is also how you import animations from older versions of Drawpile.
+
+The key frame length decides how many frames each imported file or layer should be held. A value of 1 means the frames will be placed adjacent to each other in the timeline, 2 means they'll be spaced with an empty frame between them and so on.
 
 ![Animation import dialog]({{ "/assets/img/help/animationimport.webp" | relative_url }})

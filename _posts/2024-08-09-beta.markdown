@@ -1,0 +1,91 @@
+---
+layout: drawpile_post
+title: "New Stuff in the 2.2.2 Beta and What's Beyond"
+date: 2024-08-09 18:40:00 +0200
+category: "devblog"
+tag: "@askmeaboutloom"
+---
+
+The first Drawpile 2.2.2 has been released. You can download it [from the downloads section on drawpile.net](https://drawpile.net/download/#Beta){:target="_blank"}.
+
+To see everything that's new, you can [take a look at the changelog in the release announcement](https://drawpile.net/news/release-2.2.2-beta.3/){:target="_blank"}. However, here's some of the most notable things illustrated.
+
+### Better Selections
+
+Selections have been completely rewritten. They are now persistent, so you can make a selection and then add to,a remove from and intersect with it. Deselecting is done explicitly, for example by double-clicking outside of the selection.
+
+You can invert, grow, shrink and feather selections through the menu at the top. If you want to select everything on a layer, there's the option to select layer bounds. You can also turn the contents of a layer into a selection, for example if you want to expand and fill it to give it a sticker-like outline or similar.
+
+<video controls>
+  <source src="{{ "/assets/vid/2024-08-09_selection.mp4" | relative_url }}" type="video/mp4"/>
+</video>
+
+### Improved Transforms
+
+Transforms are now separate from selections. To start transforming, you can click on your selection and it will switch over to a transform. There you can scale, rotate, shear and distort freely. To apply it, you can either double-click outside of the transform or hit Enter. Also, clicking outside of the transform once now no longer applies it instantly, so no more accidentally missing an arrow and having to redo the entire transform over again.
+
+Also, you can finally transform multiple layers at once now. For example, when you have a layer group selected, you can move the contents of the entire group. To change which layers are affected, you can toggle the checkboxes that show up in the layer list when you're transforming.
+
+Another bit of improvement: when you transform a selection that is too large and would get cancelled to avoid chugging, Drawpile now automatically turns it into a cut-and-paste operation instead.
+
+<video controls>
+  <source src="{{ "/assets/vid/2024-08-09_transform.mp4" | relative_url }}" type="video/mp4"/>
+</video>
+
+### Extended Fill Tool
+
+The fill tool now doesn't immediately fill after you click, it instead previews your fill locally and asks you for confirmation. That means you won't "flashbang" other people even when you're using a large size limit and, if you have a slow connection, won't have to wait for your undo to go through.
+
+You can also *change* your fill while it's being previewed. Set the color to something else, adjust the opacity or modify the tolerance without having to redo the fill. You can also change the layer your fill is on.
+
+On top of that, there's now more settings available: shrinking in addition to expanding the fill, filling all similar colors or the entire selection instead of just connected areas, opacity control and letting you use all blend modes instead of just a handful.
+
+<video controls>
+  <source src="{{ "/assets/vid/2024-08-09_fill.mp4" | relative_url }}" type="video/mp4"/>
+</video>
+
+### New Magic Wand Tool
+
+The magic wand tool is basically a fill tool for selections. It works pretty much identically, with most of the same controls. It also asks for confirmation after "filling", so you can make the same kind of adjustments without having to click again. Just as with the other selection tools, it can add to, remove from and intersect with the existing selection.
+
+<video controls>
+  <source src="{{ "/assets/vid/2024-08-09_magicwand.mp4" | relative_url }}" type="video/mp4"/>
+</video>
+
+### More Animation Imports and Exports
+
+You can now import animations from a set of frames, as well as from layers in an ORA or PSD file. These are available from the File → Import menu.
+
+![Animation import dialog]({{ "/assets/img/2024-08-09_animimport.webp" | relative_url }})
+
+Exporting animations is also more comprehensive now, letting you export as MP4 or WEBM video and animated WEBP images. You can also export frames in a ZIP folder now, which means you can use those in the browser and on Android now, where exporting PNG frames as separate files isn't possible.
+
+![Animation export dialog]({{ "/assets/img/2024-08-09_animexport.webp" | relative_url }})
+
+### And More
+
+There's of course other stuff, like rulers, new canvas renderers, a pan tool, better tablet handling, WEBP support and more. If you're interested in going back and looking at what's been going on, you can peruse [the development blog](/devblog/), which has regular updates on what's been worked on.
+
+## What's Coming
+
+There's some things that's planned to be implemented until the final version of Drawpile 2.2.2.
+
+Selections still could use some additional work. For example, having a mesh transform or a pivot point would be nice. The way that selection masks look may also yet change from the current look.
+
+The host and session settings dialog are supposed to get an overhaul. They've kind of grown over time, making them pretty clunky and difficult to use. They need to be consolidated so that you can just set up sessions without needing so much clicking and fiddling.
+
+The fill and magic wand tools could get optimized a bit better in unlimited mode and their gap detection improved by taking code from Krita.
+
+And there's some ideas on how to improve Drawpile for new users and those who are normally used to other drawing programs. This has a few different aspects, like keyboard shortcut presets with different program defaults, a tablet setup dialog that helps fiddle with the different driver, touch and stabilization stuff, as well as making the brush slot system optional and instead allowing you to only use presets instead, similar to how most other programs do it.
+
+## What's Beyond
+
+One thing that's notably missing about selections is of course the ability to use them to mask your brush strokes. This can't happen in 2.2.x because it would break compatibility with older 2.2 clients that don't understand that kind of masking, so this is planned to come in Drawpile 2.3.0. What would also be cool is to add an automatic "stay inside the lines" masking mode, which the selection system already has some provisions for supporting.
+
+There's some plans to rework the animation system to allow for easier collaboration with multiple animations on the same canvas and remove the fiddling required to switch between animation and regular mode, as well as adding support for cel-style animation tracks. You can read some more thoughts on that [in this article on animation plans](/devblog/2024/03/11/animation.html).
+
+We also have some ideas on how we could make session resets less disruptive. There's also [an article on that](/devblog/2024/03/03/resets.html).
+
+Adding facilities for automatic recording and recovery in Drawpile is also major point of improvement. We have a very nice and lightweight recording facility already in place, which we could use to restore not just after a crash, but also travel back in time and restore things that were accidentally deleted in the past. Or even go back and edit the recording to let you fix the old "oops I lined on the sketch layer" issue. It would also allow for adding an easy to use timelapse feature on top of it, which is already implemented as a command-line tool, so it's basically just waiting to be wired up to something.
+
+And other things! If you're interested, you can take a look at [the issues on GitHub](https://github.com/drawpile/Drawpile/issues){:target="_blank"}, it should be a reasonably complete list of ideas and problems.

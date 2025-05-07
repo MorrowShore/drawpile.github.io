@@ -24,10 +24,11 @@ If you'd like to take on a task, we strongly recommend getting in contact with u
 
 Auto-format code.
 
-Use clang-format for C & C++, rustfmt for Rust, gofmt for Go, Prettier for JavaScript and TypeScript, black for Python.
-Some files aren't auto-formatted yet. When you make changes to them, either leave them be and make your new code follow the ambient format or auto-format them in a separate commit.
+Use clang-format for C C++, rustfmt for Rust, gofmt for Go, Prettier for JavaScript and TypeScript, black for Python.
 
-Insert a `SPDX-License-Identifier` comment at the beginning of your files. For the parts that still use large & verbose comment block, either leave them be or replace them with an SPDX comment.
+Some files aren't auto-formatted yet. When you make changes to them, either leave them be and make your new code follow the ambient format or auto-format them in a separate commit. If it's a really huge file, you can also put `// clang-format off` at the beginning of the file and use `// clang-format on` to only format certain sections to let the file become more formatted over time.
+
+Insert a `SPDX-License-Identifier` comment at the beginning of your files. For the parts that still use large verbose comment block, either leave them be or replace them with an SPDX comment.
 
 ## Attributions
 
@@ -45,18 +46,17 @@ If you take code from elsewhere, attribute it properly, ideally with an `SPDX-Sn
 
 Don't use proprietary code from elsewhere, or any code with an incompatible license.
 
-Avoid GitHub Copilot or any other machine-learning-based tool that will regurgitate someone else's improperly-licensed code.
+Avoid GitHub Copilot, ChatGPT or any other machine-learning-based tool that will regurgitate someone else's improperly-licensed code.
 
 ## Dependencies
 
 Keep dependencies to an absolute minimum; they are a maintenance burden and make building Drawpile harder, especially in the long run.
 
-Remember that we have to get every dependency to build on a variety of different platforms: Linux (Flatpak & AppImage), macOS, Windows (x86 & x64), Android (arm32 & arm64) and WebAssembly.
+Remember that we have to get every dependency to build on a many different platforms: Linux (Flatpak and AppImage), macOS (Intel and Apple Silicon), Windows (x86 and x64), Android (arm32, arm64, x86 and x64; APK and F-Droid) and WebAssembly.
 
-It must be possible to sensibly develop and expand upon them, so the packages should either be available in common Linux distributions and vcpkg, or be bundled with Drawpile.
+To make building from source as easy as possible, dependencies must either be available in common Linux distributions and vcpkg or be bundled with Drawpile.
 
-Remember to test and keep things compatible with both Qt5 and Qt6.
-Qt6 has stopped supporting Windows 7 and old Android devices, which we are not willing to cut out. Qt6 also doesn't come with ANGLE anymore, which is required for the OpenGL hardware-accelerated canvas renderer.
+Test and keep things compatible with both Qt5 and Qt6. Qt6 has stopped supporting Windows 7 and old Android devices, which we are not willing to cut out. Qt6 also doesn't come with ANGLE anymore, which is required for the OpenGL hardware-accelerated canvas renderer.
 
 ## Avoid Troublesome Features
 
@@ -78,15 +78,21 @@ The C++ language and the Qt framework have some parts that should either be avoi
 
 * Avoid ranges from C++20. They take an eternity to compile.
 
-* Avoid std::array. It's verbose and produces terrible error messages, just use a C-style array instead.
+* Avoid std::array if possible. It's verbose and produces terrible error messages, just use a C-style array instead.
+
+* Avoid placement new. MSVC will not return the same address you put into it, so it's effectively unusable.
 
 * Avoid using Qt enums in settings directly, use their integer values instead. The enums are fragile, you can't move or rename them without them breaking. They also break when switching between Qt5 and Qt6.
 
+* Avoid Qt interfaces that start a nested event loop, such as `QDialog::exec` or the static functions in `QMessageBox` and `QInputDialog`. Basically anything that opens a dialog and then returns the result when the user closes it, suspending the current function. This kind of thing is not properly supported under WebAssembly.
+
 * Avoid dealing with settings or Qt metatype attributes during static initialization. They wouldn't be loaded properly yet and will cause assertion failures when using Qt in debug mode.
 
-* Avoid Qt's synchronization primitives (QMutex & friends) in places where performance matters. On Windows, they are extremely slow. Use DP\_Mutex & friends instead, they wrap the platform's synchronization primitives instead and are much faster.
+* Avoid Qt's synchronization primitives (QMutex friends) in places where performance matters. On Windows, they are extremely slow. Use DP\_Mutex and friends instead, they wrap the platform's synchronization primitives instead and are much faster.
 
-* Using Qt Designer for UIs is mildly discouraged. It's pretty clunky, and often makes a mess of stuff like the tab order, making it harder to figure out where connections are made... and the merge conflicts it generates are virtually unsolvable. However, if it makes your task much easier, feel free to use it.
+* Using Qt Designer for UIs is mildly discouraged. It's pretty clunky, and often makes a mess of stuff like the tab order, making it harder to figure out where connections are made. The merge conflicts it generates are also virtually unsolvable, usually leading to having to do the work twice. However, if it makes your task much easier, feel free to use it.
+
+* In general, if you have the choice between a "fancy", "clean" C++ or Qt metaprogramming way to solve something and a simple, dirty preprocessor macro or similar, pick the latter. The chances that MSVC will misbehave or that you'll have bad behavior in some Qt version are pretty high. Experience says that these will be crashing bugs too, which aren't worth the little extra prettiness.
 
 ## Comments
 

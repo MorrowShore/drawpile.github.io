@@ -16,11 +16,11 @@ Drawpile has a few different ways of stabilizing your brush strokes. You can con
 
 Different tablet devices have very different levels of precision. For example, Wacom devices report every tiny movement to Drawpile all the time, whereas Android devices are much coarser.
 
-In the Preferences under the Input tab, you can adjust the following settings until they feel right for you:
+Under Edit → Preferences under the Tablet tab, you can adjust the following settings until they feel right for you:
+
+**Global smoothing** will use multiple points reported by the tablet to make a single point of your stroke. The higher the value, the smoother your strokes are, but too high values may end up feeling slow.
 
 **Compensate jagged curves** helps against fast brush strokes becoming jaggy. This is especially important for tablets with coarse input. On more precise tablets, this shouldn't make a difference either way.
-
-**Smoothing** will use multiple points reported by the tablet to make a single point of your stroke. The higher the value, the smoother your strokes are, but too high values may end up feeling slow.
 
 Try to find settings that feel right for most brushes. That way, you don't have to mess with each individual brush's stabilization settings as much.
 
